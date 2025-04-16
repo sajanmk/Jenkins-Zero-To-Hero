@@ -18,7 +18,7 @@ pipeline {
         stage('Run Application') {
             steps {
                 // Run the Node.js application
-                sh 'node app.js' // Assuming you have a file named `app.js`
+                sh 'node my-first-pipeline/app.js' // Assuming you have a file named `app.js`
             }
         }
 
