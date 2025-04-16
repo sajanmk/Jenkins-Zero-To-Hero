@@ -6,21 +6,16 @@ pipeline {
         }
     }
     stages {
-        stage('Clone Repo') {
-            steps {
-                echo 'Cloning the repository...'
-                // Git step is implicit if you're using Git webhook or multibranch pipeline
-            }
-        }
         stage('Run Hello World') {
             steps {
+                echo 'Starting Hello World Python script...'
                 sh 'python3 app/hello.py'
             }
         }
     }
     post {
         always {
-            echo 'Pipeline finished.'
+            echo 'Pipeline complete.'
         }
     }
 }
