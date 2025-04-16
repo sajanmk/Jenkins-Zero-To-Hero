@@ -8,7 +8,12 @@ pipeline {
         stage('Run Hello World') {
             steps {
                 echo 'Starting Hello World Python script...'
-                sh 'python3 app/hello.py'
+                sh 'python3 My-test-code/app/hello.py'
+            }
+        }
+        stage('Debug - List Files') {
+            steps {
+                sh 'ls -R'
             }
         }
     }
