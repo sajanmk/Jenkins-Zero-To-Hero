@@ -1,12 +1,59 @@
 pipeline {
-  agent {
-    docker { image 'node:16-alpine' }
-  }
-  stages {
-    stage('Test') {
-      steps {
-        sh 'node --version'
-      }
+    agent {
+        docker {
+            image 'node:14' // Using the official Node.js Docker image
+            label 'node' // Optional: if you want to restrict to specific agents, you can use labels
+            args '-v /tmp:/tmp' // Optional: if you need to mount any volumes, add them here
+        }
     }
-  }
+
+    environment {
+        MY_VAR = 'Hello, World!' // Example environment variable
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the code from the repository
+                checkout scm
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                // Install dependencies for the Node.js project
+                sh 'npm install'
+            }
+        }
+
+        stage('Run Application') {
+            steps {
+                // Run the Node.js application
+                sh 'node app.js' // Assuming you have a file named `app.js`
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Placeholder for running tests (if you have any)
+                echo 'Running tests...'
+                sh 'echo "Test step goes here"'
+            }
+        }
+    }
+
+    post {
+        always {
+            // This will always run, regardless of the pipeline status (success or failure)
+            echo "Pipeline completed"
+        }
+        success {
+            // This will run only if the pipeline succeeds
+            echo "The Node.js app ran successfully!"
+        }
+        failure {
+            // This will run only if the pipeline fails
+            echo "Something went wrong, the pipeline failed."
+        }
+    }
 }
