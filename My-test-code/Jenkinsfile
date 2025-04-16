@@ -1,1 +1,26 @@
-.gitkeep
+pipeline {
+    agent {
+        docker {
+            image 'python:3.10-slim'
+            label 'docker'
+        }
+    }
+    stages {
+        stage('Clone Repo') {
+            steps {
+                echo 'Cloning the repository...'
+                // Git step is implicit if you're using Git webhook or multibranch pipeline
+            }
+        }
+        stage('Run Hello World') {
+            steps {
+                sh 'python3 app/hello.py'
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Pipeline finished.'
+        }
+    }
+}
