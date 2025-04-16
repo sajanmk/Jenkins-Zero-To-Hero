@@ -8,13 +8,6 @@ pipeline {
     }
 
     stages {
-        stage('Install Dependencies') {
-            steps {
-                // Install dependencies for the Node.js project
-                sh 'npm install'
-            }
-        }
-
         stage('Run Application') {
             steps {
                 // Run the Node.js application
