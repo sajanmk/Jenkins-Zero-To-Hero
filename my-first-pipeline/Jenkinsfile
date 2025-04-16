@@ -1,10 +1,6 @@
 pipeline {
     agent {
-        docker {
-            image 'node:14' // Using the official Node.js Docker image
-            label 'node' // Optional: if you want to restrict to specific agents, you can use labels
-            args '-v /tmp:/tmp' // Optional: if you need to mount any volumes, add them here
-        }
+    docker { image 'node:16-alpine' }
     }
 
     environment {
