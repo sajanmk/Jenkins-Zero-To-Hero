@@ -1,6 +1,6 @@
 pipeline {
     agent {
-    docker { image 'node:16-alpine' }
+        docker { image 'node:16-alpine' }
     }
 
     environment {
@@ -8,13 +8,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout the code from the repository
-                checkout scm
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 // Install dependencies for the Node.js project
