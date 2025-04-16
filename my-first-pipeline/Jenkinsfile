@@ -8,15 +8,5 @@ pipeline {
         sh 'node --version'
       }
     }
-     stage('Checkout Code') {
-       steps {
-              checkout scm
-             }
-        }
-    stage('build') {
-      steps {
-        sh 'node app.js'
-      }
-    }
   }
 }
