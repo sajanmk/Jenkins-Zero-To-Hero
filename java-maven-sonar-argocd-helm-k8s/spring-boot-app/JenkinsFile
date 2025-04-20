@@ -20,6 +20,15 @@ pipeline {
         //git branch: 'main', url: 'https://github.com/iam-veeramalla/Jenkins-Zero-To-Hero.git'
       }
     }
+    stage('Build App') {
+      steps {
+        sh '''
+          export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
+          echo "JAVA_HOME is set to $JAVA_HOME"
+          mvn clean package
+        '''
+      }
+    }
     stage('Build and Test') {
       steps {
         sh 'ls -ltr'
