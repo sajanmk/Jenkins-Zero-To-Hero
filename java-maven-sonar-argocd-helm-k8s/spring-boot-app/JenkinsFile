@@ -24,6 +24,7 @@ pipeline {
       steps {
         sh '''
           cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
+          rm -rf target
           export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
           echo JAVA_HOME is set to $JAVA_HOME
           mvn clean package
