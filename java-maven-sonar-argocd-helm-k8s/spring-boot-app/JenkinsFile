@@ -1,34 +1,15 @@
 pipeline {
   agent {
     docker {
-      image 'maven:3.9-eclipse-temurin-17' // or use eclipse-temurin:17-jdk
-      args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
+      image 'abhishekf5/maven-abhishek-docker-agent:v1'
+      args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
-  }
-  tools {
-    jdk 'jdk17'  // Make sure this matches the name from Global Tool Configuration
   }
   stages {
-    stage('Check Java Version') {
-      steps {
-        sh 'java -version'  // This will print the Java version to the Jenkins console
-      }
-    }
     stage('Checkout') {
       steps {
         sh 'echo passed'
         //git branch: 'main', url: 'https://github.com/iam-veeramalla/Jenkins-Zero-To-Hero.git'
-      }
-    }
-    stage('Build App') {
-      steps {
-        sh '''
-          cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
-          rm -rf target
-          export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
-          echo JAVA_HOME is set to $JAVA_HOME
-          mvn clean package
-        '''
       }
     }
     stage('Build and Test') {
